@@ -8,40 +8,34 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "login_in.h"
+#include "login_up.h"
 
-struct xuesheng{
+struct yonghu
+{
     char name[12];//学生姓名
     char pw[16];//此处为密码；
+    struct yonghu *next;
 };
-struct xuesheng xs = {
-    .name="jian_jerry",
-    .pw="wssbwsz"
-};
-int  panduan_yh(char *a)
-{
-    int q=0;
-    if(!strcmp(xs.name,a))
-        q=1;
-    return q;
-    
-}
 
-int  panduan_pw(char *a)
-{
-    int q=0;
-    if(!strcmp(xs.pw,a))
-        q=1;
-    return q;
-    
-}
+struct yonghu xs= {
+    .name="jian_jerry",
+    .pw="wssbwsz",
+    .next=NULL
+
+};
+
 int main(int argc, const char * argv[])
 {
-    
+   
+    xiejinqu();
     
     printf("欢迎使用记账本！\n请输入用户名：\n");
     char xsn[44],xsm[44];//学生姓名,密码；
+    
     while(1)
     {
+        
         scanf("%s",xsn);
         if(panduan_yh(xsn))
         {
@@ -56,11 +50,21 @@ int main(int argc, const char * argv[])
             }
             break;
         }
-        else printf("用户不存在,请重新输入:\n");
+        else
+        {
+            char chongxin[5];
+            printf("用户不存在,请重新输入用户名或创建用户（创建用户请输入yes）：\n");
+            scanf("%s",chongxin);
+            
+            if(!strcmp(chongxin, "yes"))
+                chuangjian();
+        }
+        
 
     }
     printf("login in successed\n");
-        
+    
+    
     return 0;
     
 }
