@@ -8,8 +8,33 @@
 
 #ifndef login_in_h
 #define login_in_h
+#include "jiegou.h"
+extern struct yonghu *head;
+extern struct yonghu *now;
+int  panduan_yh(char *a)
+{
+    now=head;
+    int q=0;
+    while (now!=NULL)
+    {
+        
+        if(!strcmp(now->name,a))
+            q=1;
+        now=now->next;
+    }
+    
+    return q;
 
-#include <stdio.h>
-#include <string.h>
+}
+
+
+int  panduan_pw(char *a)
+{
+    int q=0;
+    if(!strcmp(now->pw,a))
+        q=1;
+    return q;
+    
+}
 
 #endif /* login_in_h */
