@@ -11,7 +11,7 @@
 
 
 #include "jiegou.h"
-#include <stdlib.h>
+
 #define lenofyh 12
 #define lenofpw 15
 
@@ -27,18 +27,27 @@ int jiancehefa(char *a,int x)
 
 int chuangjian()
 {
+    FILE *in=fopen("/Users/nateyip/Desktop/breakfast_list/durushuju/in.txt", "a+");
     struct yonghu *newyonghu;
     newyonghu=(struct yonghu*) malloc(sizeof(struct yonghu));
     p->next=newyonghu;
-    
+    fprintf(in, "\n");
     while(1)
     {
         printf("请输入少于12个字符的用户名：\n");
         
         scanf("%s",newyonghu->name);
+        
         if(!jiancehefa(newyonghu->name,lenofyh))
             printf("用户名非法，请重新输入少于12（且不为空）个字符的用户名：\n");
-        else break;
+        else
+        {
+            fprintf(in, "%s",newyonghu->name);
+            fprintf(in, "\n",newyonghu->name);
+            //fputs(newyonghu->name,in);
+            //fputs("\n", in);
+            break; 
+        }
     }
    
     while(1)
@@ -46,13 +55,20 @@ int chuangjian()
         printf("请输入少于15个字符的用户密码：\n");
         
         scanf("%s",newyonghu->pw);
-        if(!jiancehefa(newyonghu->name,lenofpw))
-            printf("用户名非法，请重新输入少于15（且不为空）个字符的密码：\n");
-        else break;
+        if(!jiancehefa(newyonghu->pw,lenofpw))
+            printf("密码非法，请重新输入少于15（且不为空）个字符的密码：\n");
+        else
+        {
+            fprintf(in,"%s", newyonghu->pw);
+            fprintf(in, "\n",newyonghu->pw);
+           // fputs(newyonghu->pw,in);
+            //fputs("\n", in);
+            break;
+        }
     }
     newyonghu->next=NULL;
     p=newyonghu;
-    extern int n;n++;
+    fclose(in);
     return 0;
     
 }

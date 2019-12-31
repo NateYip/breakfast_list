@@ -16,6 +16,19 @@
     char pw[16];//此处为密码；
     struct yonghu *next;
 };
+
+struct zhangben 
+{
+    char ch[2];    /*'-'代表支出，‘+‘代表收入*/
+    float income_expense;
+    //int  year;
+    //int  month;
+    float  day;
+    char source_or_aim[50]; /*支出或者收入原因*/
+    struct zhangben *next;
+};
+
+
 /*
  struct yonghu xs= {
     .name="jian_jerry",

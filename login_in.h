@@ -19,8 +19,11 @@ int  panduan_yh(char *a)
     {
         
         if(!strcmp(now->name,a))
+        {
             q=1;
-        now=now->next;
+            break;
+        }
+        else now=now->next;
     }
     
     return q;
@@ -28,9 +31,17 @@ int  panduan_yh(char *a)
 }
 
 
-int  panduan_pw(char *a)
+int  panduan_pw(char *b,char *a)
 {
     int q=0;
+    now=head;
+    while(now!=NULL)
+    {
+        if(!strcmp(now->name,b))
+            break;
+        else now=now->next;
+    }
+    
     if(!strcmp(now->pw,a))
         q=1;
     return q;

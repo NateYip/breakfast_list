@@ -15,28 +15,42 @@ int n;
 
 void xiejinqu()
 {
-    
-    
     extern struct yonghu *head;
     
+    
+ 
+    FILE *in;
+    in=fopen("/Users/nateyip/Desktop/breakfast_list/durushuju/in.txt", "r");
 
-    scanf("%d",&n);
-    for(int i=1;i<=n;i++)
+    if(in==NULL) printf("wrong\n");
+        else printf("open succeed\n");
+
+    
+    char shuju[22];
+    //fscanf(in,"%d",&n);
+    //printf("%d\n",n);
+    while(fscanf(in,"%s",shuju)!=EOF)
     {
-        char yh[22];
-        char mima[22];
-        scanf("%s",yh);
-        scanf("%s",mima);
         q=(struct yonghu*)malloc(sizeof(struct yonghu));
-        strcpy(q->name, yh);
-        strcpy(q->pw, mima);
+        strcpy(q->name,shuju);
+        //printf("%s",yh);
+        
+        fscanf(in,"%s",shuju);
+        strcpy(q->pw, shuju);
+       // printf("%s",mima);
+        
+       
+        
+        
         q->next=NULL;
         if( head==NULL)
             head=q;
         else p->next=q;
         p=q;
+
+         
     }
-    
+   fclose(in);
 }
 
 #endif /* duru_h */

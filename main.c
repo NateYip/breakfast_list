@@ -13,8 +13,16 @@
 #include "duru.h"
 #include "login_in.h"
 #include "login_up.h"
+#include "shujucaozuo.h"
+#include "printfall.h"
+#include "getinput.h"
+#include "delet.h"
+
 struct yonghu *head = NULL;
 struct yonghu *now;
+int n=0;
+struct yonghu *p,*q;
+
 
 int main(int argc, const char * argv[])
 {
@@ -32,12 +40,13 @@ int main(int argc, const char * argv[])
         {
              
             printf("请输入密码：\n");
-            printf("%s",now->pw);
+            //printf("%s",now->pw);
+            
             while(1)
             {
                 scanf("%s",xsm);
                 
-                if(panduan_pw(xsm))
+                if(panduan_pw(xsn,xsm))
                     break;
                 else printf("密码错误，请重新输入\n");
             }
@@ -63,8 +72,35 @@ int main(int argc, const char * argv[])
 
     }
     printf("login in successed\n");
+
+   
+    //printf("A:写入数据;B:删除数据;C:打印数据");
+    while (1)
+    {
+        printf("请输入操作选项：\n");
+        char caozuo;
+        scanf("%c",&caozuo);
     
+        switch (caozuo)
+        {
+                case 'A':
+                getinput(xsn);
+                break;
+                case 'B':
+                    delete_project(xsn);
+                    break;
+                case 'C':
+                    printfitall(xsn);
+                    break;
+            
+                default:
+                    printf("未知命令,请参考:A:写入数据;B:删除数据;C:打印数据");
+                    break;
+        }
+            
+    }
     
+
     return 0;
     
 }
