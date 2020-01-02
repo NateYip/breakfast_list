@@ -13,50 +13,32 @@
 
 void printfitall(char *name)
 {
-    char *houzhui=".txt";
-    strcat(name, houzhui);
-    char ben[100]="/Users/nateyip/Desktop/breakfast_list/yonghushuju/";
-    strcat(ben,name);
-    
-    FILE *shuju=fopen(ben,"a");
-    struct zhangben *xxsming,*reread,*head;
-    head=NULL;
-    
-    char *yhsj;
+  
+    FILE *shuju=fopen(name,"r");
+    char yhsj[30];
     float  yhq;
+    printf("以下是所有账单条目：\n");
+    float sum=0;
     while(fscanf(shuju,"%s", yhsj)!=EOF)
     {
+        if(!strcmp(yhsj,"+"))
+        printf("收入：\n");
+        else printf("支出：\n");
+        fscanf(shuju,"%f", &yhq);
+        printf("金额：%0.2f元\n",yhq);
+        if(!strcmp(yhsj,"+"))
+            sum+=yhq;
+        else sum-=yhq;
+        fscanf(shuju,"%f", &yhq);
+        printf("日期：%0.f号\n",yhq);
         
-        xxsming=(struct zhangben *)malloc(sizeof(struct zhangben));
-        strcpy(xxsming->ch, yhsj);
-        fscanf(shuju,"%f", &yhq);
-        xxsming->income_expense = yhq;
-        fscanf(shuju,"%f", &yhq);
-        xxsming->day = yhq;
         fscanf(shuju,"%s", yhsj );
-        strcpy(xxsming->source_or_aim, yhsj);
-        
-        xxsming->next= NULL;
-        
-        if(head==NULL)
-            head = xxsming;
-        else reread->next=xxsming;
-        xxsming=reread;
-        free(reread);
+        printf("原因：%s\n",yhsj);
         
     }
+    printf("结余：%0.2f元\n",sum);
     fclose(shuju);
-    struct zhangben *t;
-    t=head;
-    while (t!=NULL)
-    {
-        puts(t->ch);
-        printf("\n");
-        printf("%f\n",t->income_expense);
-        printf("%.f\n",t->day);
-        puts(t->source_or_aim);
-        puts("\n");
-    }
+    
 }
 
 #endif /* printfall_h */

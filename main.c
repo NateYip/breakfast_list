@@ -13,10 +13,10 @@
 #include "duru.h"
 #include "login_in.h"
 #include "login_up.h"
-#include "shujucaozuo.h"
 #include "printfall.h"
 #include "getinput.h"
 #include "delet.h"
+#include "xiugai.h"
 
 struct yonghu *head = NULL;
 struct yonghu *now;
@@ -73,34 +73,46 @@ int main(int argc, const char * argv[])
     }
     printf("login in successed\n");
 
-   
-    //printf("A:写入数据;B:删除数据;C:打印数据");
-    while (1)
+   char *houzhui=".txt";
+   strcat(xsn, houzhui);
+   char ben[100]={"/Users/nateyip/Desktop/breakfast_list/yonghushuju/"};
+   strcat(ben,xsn);
+    printf("1:写入数据;2:删除数据;3:打印数据;4:修改数据;5:退出程序;\n");
+    int k=0;
+    
+    while (k==0)
     {
+        
         printf("请输入操作选项：\n");
-        char caozuo;
-        scanf("%c",&caozuo);
+        int caozuo;
+        scanf("%d",&caozuo);
     
         switch (caozuo)
         {
-                case 'A':
-                getinput(xsn);
+                case 1:
+                    getinput(ben);
+                    break;
+                case 2:
+                    delete_project(ben);
+                    break;
+                case 3:
+                    printfitall(ben);
+                    break;
+            case 5:
+                k=1;
                 break;
-                case 'B':
-                    delete_project(xsn);
-                    break;
-                case 'C':
-                    printfitall(xsn);
-                    break;
-            
-                default:
-                    printf("未知命令,请参考:A:写入数据;B:删除数据;C:打印数据");
+                
+            case 4:
+                xiugai_project(ben);
+                break;
+            default:
+                    printf("未知命令,请参考:\n1:写入数据;2:删除数据;3:打印数据;4:修改数据;5:退出程序;");
                     break;
         }
             
     }
     
-
+    printf("欢迎使用！");
     return 0;
     
 }

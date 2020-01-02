@@ -13,45 +13,46 @@
 
 void delete_project(char *name)
 {
+    /*
     char *houzhui=".txt";
     strcat(name, houzhui);
     char ben[100]="/Users/nateyip/Desktop/breakfast_list/yonghushuju/";
     strcat(ben,name);
+    */
     
-    FILE *shuju=fopen(ben,"a");
-    struct zhangben *xxsming,*reread,*head;
-    head=NULL;
+    FILE *deleshuju=fopen(name,"r");
+    struct zhangben *xxsming,*reread,*delehead;
+    delehead=NULL;
     
-    char *yhsj;
+    char yhsj[30];
     float  yhq;
-    while(fscanf(shuju,"%s", yhsj)!=EOF)
+    while(fscanf(deleshuju,"%s", yhsj)!=EOF)
     {
         
         xxsming=(struct zhangben *)malloc(sizeof(struct zhangben));
         strcpy(xxsming->ch, yhsj);
-        fscanf(shuju,"%f", &yhq);
+        fscanf(deleshuju,"%f", &yhq);
         xxsming->income_expense = yhq;
-        fscanf(shuju,"%f", &yhq);
+        fscanf(deleshuju,"%f", &yhq);
         xxsming->day = yhq;
-        fscanf(shuju,"%s", yhsj );
+        fscanf(deleshuju,"%s", yhsj );
         strcpy(xxsming->source_or_aim, yhsj);
         
         xxsming->next= NULL;
         
-        if(head==NULL)
-            head = xxsming;
+        if(delehead==NULL)
+            delehead = xxsming;
         else reread->next=xxsming;
-        xxsming=reread;
-        free(reread);
+        reread=xxsming;
         
     }
-    fclose(shuju);
+    fclose(deleshuju);
     struct zhangben *current;
-    current=head;
+    current=delehead;
     printf("输入删除的日期:\n");
-    int day;
-    scanf("%d",&day);
-    struct zhangben *Pre;
+    float day;
+    scanf("%f",&day);
+    struct zhangben *Pre = NULL;
     while (current != NULL && current->day != day)
     {
         Pre = current;
@@ -65,22 +66,20 @@ void delete_project(char *name)
         return;
     }
     else
-    {
         Pre->next=current->next;
-    }
-    current= head;
-    remove(shuju);
-    fclose(shuju);
+    
+    remove(name);
+
     FILE *rewrite;
     
-    rewrite=fopen(name, "w");
-    
+    rewrite=fopen(name, "a");
+    current= delehead;
     while (current!=NULL)
     {
-        fprintf(rewrite, "%s",current->ch);
-        fprintf(rewrite, "%f",current->income_expense);
-        fprintf(rewrite, "%f",current->day);
-        fprintf(rewrite, "%s",current->source_or_aim);
+        fprintf(rewrite, "%s\n",current->ch);
+        fprintf(rewrite, "%f\n",current->income_expense);
+        fprintf(rewrite, "%f\n",current->day);
+        fprintf(rewrite, "%s\n",current->source_or_aim);
         current=current->next;
         
     }

@@ -12,29 +12,34 @@
 
 void getinput(char *name)
 {
-    reread_information(name);
-    char ben[100]={"/Users/nateyip/Desktop/breakfast_list/yonghushuju/"};
-    char *houzhui=".txt";
-    strcat(name, houzhui);
+    //reread_information(name);
+    
+    /*char ben[100]={"/Users/nateyip/Desktop/breakfast_list/yonghushuju/"};
+    //char *houzhui=".txt";
+    //strcat(name, houzhui);
     strcat(ben,name);
+    */
+    FILE *wenjian=fopen(name ,"a");
+    printf("请输入'-'代表支出，‘+‘代表收入\n");
+    char shujchar[30];
+    float shujint;
     
-    FILE *wenjian=fopen(ben,"a");
-    printf("请输入'-'代表支出，‘+‘代表收入");
-    char *shujchar = NULL;
-    int shujint;
+    scanf("\n%s",shujchar);
     
-    scanf("%s",shujchar);
     fprintf(wenjian,"%s\n", shujchar);
-    printf("请输入收入或者支出金额");
-    scanf("%d",shujint);
+    printf("请输入收入或者支出金额\n");
+    scanf("%f",&shujint);
     fprintf(wenjian,"%f\n", shujint);
     printf("请输入日期");
-    scanf("%d",shujint);
+    scanf("%f",&shujint);
+    
     fprintf(wenjian,"%f\n", shujint);
-    printf("请输入支出或者收入原因");
+    printf("请输入支出或者收入原因\n");
     scanf("%s",shujchar);
     fprintf(wenjian,"%s\n",shujchar);
     
+    
+    fclose(wenjian);
 }
 
 
